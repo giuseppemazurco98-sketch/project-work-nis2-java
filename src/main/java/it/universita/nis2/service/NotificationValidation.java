@@ -13,5 +13,11 @@ public final class NotificationValidation {
                 || incident.knownAt == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Campi di base mancanti");
         }
+        if (incident.usersAffected < 0 || incident.downtimeMinutes < 0) {
+            throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST,
+                "Utenti coinvolti e minuti di interruzione non possono essere negativi"
+            );
+        }
     }
 }
