@@ -1,5 +1,5 @@
 code,description,applicableTo,source
-IS-1,Perdita di riservatezza verso l'esterno di dati digitali di proprieta' del soggetto NIS o sotto il suo controllo,ENTRAMBI,"Determinazione ACN 379907/2025, Allegati 3 e 4"
-IS-2,Perdita di integrita' dei dati con impatto verso l'esterno,ENTRAMBI,"Determinazione ACN 379907/2025, Allegati 3 e 4"
-IS-3,"Violazione dei livelli di servizio attesi, definiti secondo la misura DE.CM-01",ENTRAMBI,"Determinazione ACN 379907/2025, Allegati 3 e 4"
-IS-4,Accesso non autorizzato o con abuso dei privilegi a dati digitali del soggetto NIS o sotto il suo controllo,ESSENZIALE,"Determinazione ACN 379907/2025, Allegati 3 e 4"
+IS-1,"Il soggetto NIS ha evidenza della perdita di riservatezza, verso l'esterno, di dati digitali di sua proprietà o sui quali esercita il controllo, anche parziale.",ENTRAMBI,"Determinazione ACN 379907/2025, Allegati 3 e 4"
+IS-2,"Il soggetto NIS ha evidenza della perdita di integrità, con impatto verso l'esterno, di dati digitali di sua proprietà o sui quali esercita il controllo, anche parziale.",ENTRAMBI,"Determinazione ACN 379907/2025, Allegati 3 e 4"
+IS-3,"Il soggetto NIS ha evidenza della violazione dei livelli di servizio attesi dei suoi servizi e/o delle sue attività, sulla base dei livelli di servizio atteso (SL) stabiliti ai sensi della misura DE.CM-01.",ENTRAMBI,"Determinazione ACN 379907/2025, Allegati 3 e 4"
+IS-4,"Il soggetto NIS ha evidenza, anche sulla base dei parametri quali-quantitativi definiti ai sensi della misura DE.CM-01, dell'accesso, non autorizzato o con abuso dei privilegi concessi, a dati digitali di sua proprietà o sui quali esercita il controllo, anche parziale.",ESSENZIALE,"Determinazione ACN 379907/2025, Allegato 4"
