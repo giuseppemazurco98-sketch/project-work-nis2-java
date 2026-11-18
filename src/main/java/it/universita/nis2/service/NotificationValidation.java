@@ -20,4 +20,17 @@ public final class NotificationValidation {
             );
         }
     }
+
+    public static void validatePrenotifica(Incident incident) {
+        validateBase(incident);
+
+        if (incident.category == null || incident.category.isBlank()
+                || incident.entityType == null || incident.entityType.isBlank()) {
+            throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST,
+                "Pre-notifica: categoria ACN e tipo di soggetto obbligatori"
+            );
+        }
+    }
+
 }
