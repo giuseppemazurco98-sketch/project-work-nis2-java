@@ -33,4 +33,16 @@ public final class NotificationValidation {
         }
     }
 
+
+    public static void validateNotifica(Incident incident) {
+        validatePrenotifica(incident);
+
+        if (incident.usersAffected == 0 && incident.downtimeMinutes == 0) {
+            throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST,
+                "Notifica: indicare almeno un dato quantitativo di impatto"
+            );
+        }
+    }
+
 }
