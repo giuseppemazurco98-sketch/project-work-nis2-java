@@ -45,4 +45,16 @@ public final class NotificationValidation {
         }
     }
 
+
+    public static void validateFinale(Incident incident) {
+        validateBase(incident);
+
+        if (incident.description.trim().length() < 30) {
+            throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST,
+                "Relazione finale: descrizione di almeno 30 caratteri"
+            );
+        }
+    }
+
 }
