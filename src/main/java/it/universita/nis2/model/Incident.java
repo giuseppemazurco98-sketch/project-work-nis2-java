@@ -14,6 +14,7 @@ public int downtimeMinutes;
 public boolean externalDataLoss;
 public boolean externalIntegrityLoss;
 public boolean slaViolated;
+public boolean unauthorizedAccess;
 public String status="BOZZA";
 public LocalDateTime createdAt=LocalDateTime.now();
 public LocalDateTime updatedAt=LocalDateTime.now();

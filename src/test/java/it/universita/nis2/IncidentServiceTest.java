@@ -81,4 +81,55 @@ class IncidentServiceTest {
         assertTrue(errore.getReason().contains("almeno 30 caratteri"));
     }
 
+
+    @Test
+    void finaleContieneStoricoRiclassificazione() throws Exception {
+        var incidenti = mock(it.universita.nis2.repo.IncidentRepository.class);
+        var notifiche = mock(it.universita.nis2.repo.SubmissionRepository.class);
+        var modifiche = mock(it.universita.nis2.repo.ReclassificationRepository.class);
+        var categorie = mock(it.universita.nis2.repo.CategoryRepository.class);
+        var mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+        var service = new IncidentService(incidenti, notifiche, modifiche, categorie, mapper);
+
+        Incident incidente = new Incident();
+        incidente.id = 99L;
+        incidente.title = "Interruzione simulata autenticazione";
+        incidente.description = "Interruzione simulata del servizio con successiva alterazione dei dati.";
+        incidente.knownAt = java.time.LocalDateTime.of(2026, 11, 10, 9, 0);
+        incidente.category = "IS-2";
+        incidente.entityType = "IMPORTANTE";
+        incidente.externalIntegrityLoss = true;
+
+        var prenotifica = new it.universita.nis2.model.Submission();
+        prenotifica.phase = "PRENOTIFICA";
+        var notifica = new it.universita.nis2.model.Submission();
+        notifica.phase = "NOTIFICA";
+
+        var riclassificazione = new it.universita.nis2.model.Reclassification();
+        riclassificazione.incidentId = 99L;
+        riclassificazione.fromCategory = "IS-3";
+        riclassificazione.toCategory = "IS-2";
+        riclassificazione.reason = "Alterazione simulata dei dati verso l'esterno";
+        riclassificazione.changedAt = java.time.LocalDateTime.of(2026, 11, 18, 10, 36);
+
+        when(incidenti.findById(99L)).thenReturn(java.util.Optional.of(incidente));
+        when(notifiche.findByIncidentIdOrderByCreatedAtAsc(99L))
+            .thenReturn(java.util.List.of(prenotifica, notifica));
+        when(modifiche.findByIncidentIdOrderByChangedAtAsc(99L))
+            .thenReturn(java.util.List.of(riclassificazione));
+        when(notifiche.save(any(it.universita.nis2.model.Submission.class)))
+            .thenAnswer(inv -> inv.getArgument(0));
+
+        var finale = service.submit(99L, "FINALE");
+        var json = mapper.readTree(finale.snapshotJson);
+        var storico = json.path("storicoRiclassificazioni");
+
+        assertEquals("IS-2", json.path("classificazione").asText());
+        assertEquals(1, storico.size());
+        assertEquals("IS-3", storico.get(0).path("categoriaPrecedente").asText());
+        assertEquals("IS-2", storico.get(0).path("categoriaNuova").asText());
+        assertEquals("2026-11-18T10:36", storico.get(0).path("dataRiclassificazione").asText());
+        assertEquals(riclassificazione.reason, storico.get(0).path("motivazione").asText());
+    }
+
 }
