@@ -1,0 +1,13 @@
+Campo o condizione;PRENOTIFICA;NOTIFICA;FINALE
+Dati validi (controllo);ACCETTATO;ACCETTATO;ACCETTATO
+title assente;RIFIUTATO;RIFIUTATO;RIFIUTATO
+description assente;RIFIUTATO;RIFIUTATO;RIFIUTATO
+knownAt assente;RIFIUTATO;RIFIUTATO;RIFIUTATO
+category assente;RIFIUTATO;RIFIUTATO;ACCETTATO
+entityType assente;RIFIUTATO;RIFIUTATO;ACCETTATO
+usersAffected negativo;RIFIUTATO;RIFIUTATO;RIFIUTATO
+downtimeMinutes negativo;RIFIUTATO;RIFIUTATO;RIFIUTATO
+usersAffected uguale a zero;ACCETTATO;ACCETTATO;ACCETTATO
+downtimeMinutes uguale a zero;ACCETTATO;ACCETTATO;ACCETTATO
+usersAffected e downtimeMinutes entrambi zero;ACCETTATO;RIFIUTATO;ACCETTATO
+description inferiore a 30 caratteri;ACCETTATO;ACCETTATO;RIFIUTATO
